@@ -1,0 +1,17 @@
+
+*{
+
+}
+
+
+input:focus{
+    box-shadow: none !important; 
+    border: 2px solid lightblue;
+}
+
+.myNavColor{
+    background-color: #1098ad !important;
+}
+.svgIconNav{
+    width: 18px !important;
+}
