@@ -1,0 +1,100 @@
+{
+  "brands": [
+    {
+      "id": 1,
+      "brandName": "Apple"
+    },
+    {
+      "id": 2,
+      "brandName": "Samsung"
+    },
+    {
+      "id": 3,
+      "brandName": "LG"
+    },
+    {
+      "id": 4,
+      "brandName": "Dell"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "categoryName": "Electronics"
+    },
+    {
+      "id": 2,
+      "categoryName": "Mobiles"
+    },
+    {
+      "id": 3,
+      "categoryName": "Home Appliances"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "productName": "IPhone",
+      "price": 87000,
+      "brand": 1,
+      "categoryId": 2
+    },
+    {
+      "id": 2,
+      "productName": "Galaxy S",
+      "price": 99000,
+      "brand": 2,
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "productName": "Xperia S",
+      "price": 29000,
+      "brand": 3,
+      "categoryId": 2
+    },
+    {
+      "id": 4,
+      "productName": "Monitor TFT S",
+      "price": 29000,
+      "brand": 4,
+      "categoryId": 1
+    },
+    {
+      "id": 5,
+      "productName": "Xperia S",
+      "price": 29000,
+      "brand": 4,
+      "categoryId": 1
+    }
+  ],
+
+  "users": [
+    {
+      "id": 1,
+      "email": "scott@gmail.com",
+      "password": "Scott123",
+      "fullName": "Scott",
+      "gender": "Male",
+      "dateofbirth": "2000-12-15",
+      "country": "USA",
+      "receiveNewsLetters": true
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1,
+      "quantity": 2,
+      "isPaymentCompleted": true
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "productId": 3,
+      "quantity": 12,
+      "isPaymentCompleted": false
+    }
+  ]
+}
