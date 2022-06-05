@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Register() {
+function Register(props) {
   const [register, setRegister] = useState({
     email: "",
     password: "",
@@ -113,6 +113,13 @@ function Register() {
       errorsData.country.push("Country is required");
     }
     //gender ends
+    //receiveNewsLetters start
+    // errorsData.receiveNewsLetters = [];
+
+    // if (!register.receiveNewsLetters) {
+    //   errorsData.receiveNewsLetters.push("Recevie newsletters is required");
+    // }
+    // //receiveNewsLetters ends
 
     setErrors(errorsData);
   };
@@ -138,6 +145,9 @@ function Register() {
   }, [register]);
 
   //events
+  const handleBlur = event => {
+    setDirty({ ...dirty, [event.target.name]: true });
+  };
   const handleChange = event => {
     if (event.target.name === "receiveNewsLetters") {
       setRegister({
@@ -171,12 +181,11 @@ function Register() {
         setMessage(
           <span className="text-success">{`User=> ${register.fullName} successfully registered`}</span>
         );
+        props.history.replace("/dashboard");
       }
     } else {
       setMessage(<span className="text-danger">Form Validation Failed</span>);
     }
-
-    console.log("register click");
   };
   //events
 
@@ -220,7 +229,13 @@ function Register() {
                     placeholder="abc@abc.com"
                     value={register.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
+                  <div className="text-danger">
+                    {dirty["email"] && errors["email"][0]
+                      ? errors["email"]
+                      : ""}
+                  </div>
                 </div>
               </div>
               {/* Email ends */}
@@ -238,7 +253,13 @@ function Register() {
                     placeholder="**********"
                     value={register.password}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
+                  <div className="text-danger">
+                    {dirty["password"] && errors["password"][0]
+                      ? errors["password"]
+                      : ""}
+                  </div>
                 </div>
               </div>
               {/* password ends */}
@@ -256,7 +277,13 @@ function Register() {
                     placeholder="enter name"
                     value={register.fullName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
+                  <div className="text-danger">
+                    {dirty["fullName"] && errors["fullName"][0]
+                      ? errors["fullName"]
+                      : ""}
+                  </div>
                 </div>
               </div>
 
@@ -275,7 +302,13 @@ function Register() {
                     placeholder="date of birth"
                     value={register.dateOfBirth}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
+                  <div className="text-danger">
+                    {dirty["dateOfBirth"] && errors["dateOfBirth"][0]
+                      ? errors["dateOfBirth"]
+                      : ""}
+                  </div>
                 </div>
               </div>
 
@@ -295,6 +328,7 @@ function Register() {
                       className="form-check-input"
                       checked={register.gender === "male" ? true : false}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                     <label htmlFor="male" className="form-check-inline">
                       Male
@@ -309,10 +343,16 @@ function Register() {
                       className="form-check-input"
                       checked={register.gender === "female" ? true : false}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                     <label htmlFor="female" className="form-check-inline">
                       Female
                     </label>
+                  </div>
+                  <div className="text-danger">
+                    {dirty["gender"] && errors["gender"][0]
+                      ? errors["gender"]
+                      : ""}
                   </div>
                 </div>
               </div>
@@ -329,6 +369,7 @@ function Register() {
                     value={register.country}
                     className="form-control"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   >
                     {countries.map(country => (
                       <option key={country.id} value={country.id}>
@@ -336,6 +377,11 @@ function Register() {
                       </option>
                     ))}
                   </select>
+                  <div className="text-danger">
+                    {dirty["country"] && errors["country"][0]
+                      ? errors["country"]
+                      : ""}
+                  </div>
                 </div>
               </div>
 
@@ -357,6 +403,7 @@ function Register() {
                         register.receiveNewsLetters === true ? true : false
                       }
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                     <label
                       htmlFor="receiveNewsLetters"
@@ -364,6 +411,12 @@ function Register() {
                     >
                       Receive news letters ?
                     </label>
+                    {/* <div className="text-danger">
+                      {dirty["receiveNewsLetters"] &&
+                      errors["receiveNewsLetters"][0]
+                        ? errors["receiveNewsLetters"]
+                        : ""}
+                    </div> */}
                   </div>
                 </div>
               </div>
