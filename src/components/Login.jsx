@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../UserContext";
 
 const Login = props => {
   const [login, setLogin] = useState({ email: "", password: "" });
   useEffect(() => {
     document.title = "Login";
   }, []);
+
+  const _userContext = useContext(UserContext);
 
   useEffect(() => {
     validate();
@@ -89,6 +92,12 @@ const Login = props => {
         let resBody = await response.json();
         console.log(resBody);
         if (resBody.length > 0) {
+          _userContext.setUser({
+            ..._userContext.user,
+            isLoggedIn: true,
+            currentUserID: resBody[0].id,
+            currentUserName: resBody[0].fullName,
+          });
           props.history.replace("/dashboard");
         } else {
           setMsg(

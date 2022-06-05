@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import UserContext from "../../UserContext";
 
 function Navbar() {
+  const _userContext = useContext(UserContext);
+
+  const hanldeLogoutClick = e => {
+    e.preventDefault();
+    _userContext.setUser({
+      isLoggedIn: false,
+      currentUserName: null,
+      currentUserID: null,
+    });
+
+    window.location = "/";
+  };
+
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark myNavColor">
@@ -28,18 +42,8 @@ function Navbar() {
                 Dashboard
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                to="/"
-                exact
-                className="nav-link mx-2"
-                activeClassName="active"
-              >
-                <i className="fa fa-lock mr-1"></i>
-                Login
-              </NavLink>
-            </li>
-            <li className="nav-item ">
+
+            {!_userContext.user.isLoggedIn ? (
               <NavLink
                 to="/register"
                 className="nav-link"
@@ -63,32 +67,61 @@ function Navbar() {
                   <span> Register</span>
                 </div>
               </NavLink>
+            ) : (
+              ""
+            )}
+            <li className="nav-item ">
+              {!_userContext.user.isLoggedIn ? (
+                <NavLink
+                  to="/"
+                  exact
+                  className="nav-link mx-2"
+                  activeClassName="active"
+                >
+                  <i className="fa fa-lock mr-1"></i>
+                  Login
+                </NavLink>
+              ) : (
+                ""
+              )}
             </li>
           </ul>
-
-          <ul className="ml-auto navbar-nav">
+          {_userContext.user.isLoggedIn ? (
             <div style={{ marginRight: "100px" }}>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="fa fa-user-o mr-1"></i>
-                  User
-                </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">
-                    Logout
+              <ul className="ml-auto navbar-nav">
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i className="fa fa-user-o mr-1"></i>
+                    {_userContext.user.isLoggedIn
+                      ? _userContext.user.currentUserName
+                      : "User"}
                   </a>
-                </div>
-              </li>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/#"
+                      onClick={hanldeLogoutClick}
+                    >
+                      Logout
+                    </a>
+                  </div>
+                </li>
+              </ul>
             </div>
-          </ul>
+          ) : (
+            ""
+          )}
         </div>
       </nav>
     </React.Fragment>
