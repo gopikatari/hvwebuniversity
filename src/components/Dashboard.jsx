@@ -4,8 +4,9 @@ import Order from "./Order";
 import { OrderService, ProductService } from "./../services/Service";
 
 const Dashboard = () => {
-  testFunctions();
   const [orders, setOrders] = useState([]);
+  const [showOrderDeleted, setShowOrderDeleted] = useState(false);
+  const [showOrderPlaced, setShowOrderPlaced] = useState(false);
   const _userContext = useContext(UserContext);
 
   let getDataAsync = useCallback(async () => {
@@ -49,6 +50,53 @@ const Dashboard = () => {
     getDataAsync();
   }, [_userContext.user.currentUserID, getDataAsync]);
 
+  //props handlers
+
+  const onBuyNowClick = useCallback(
+    async (orderID, userId, productId, quantity) => {
+      if (window.confirm(`Are you sure you want to purchase ??`)) {
+        let updatedOrder = {
+          id: orderID,
+          userId: userId,
+          productId: productId,
+          quantity: quantity,
+          isPaymentCompleted: true,
+        };
+
+        let response = await fetch(`http://localhost:5000/orders/${orderID}`, {
+          method: "PUT",
+          body: JSON.stringify(updatedOrder),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+          let data = await response.json();
+          console.log(data);
+
+          setShowOrderPlaced(true);
+          await getDataAsync();
+        }
+      }
+    },
+    [getDataAsync]
+  );
+  const onDeleteNowClick = useCallback(
+    async orderID => {
+      if (window.confirm(`Are you sure you want to delete ?`)) {
+        let response = await fetch(`http://localhost:5000/orders/${orderID}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          let body = await response.json();
+
+          setShowOrderDeleted(true);
+          getDataAsync();
+        }
+      }
+    },
+    [getDataAsync]
+  );
   return (
     <>
       <div className="row">
@@ -71,6 +119,7 @@ const Dashboard = () => {
                   {OrderService.getPreviousOrders(orders).length}
                 </span>
               </h4>
+
               {OrderService.getPreviousOrders(orders).length == 0 ? (
                 <div className="text-danger">No Orders</div>
               ) : (
@@ -84,9 +133,11 @@ const Dashboard = () => {
                   quantity={order.quantity}
                   isPaymentCompleted={order.isPaymentCompleted}
                   userId={order.userId}
-                  orderId={order.orderId}
+                  orderId={order.id}
                   price={order.product.price}
                   productName={order.product.productName}
+                  onBuyNow={onBuyNowClick}
+                  onDeleteNow={onDeleteNowClick}
                 />
               ))}
             </div>
@@ -97,7 +148,45 @@ const Dashboard = () => {
                   {OrderService.getCartItems(orders).length}
                 </span>
               </h4>
+              {showOrderPlaced ? (
+                <div className="col-12">
+                  <div
+                    className="alert alert-success alert-dismissible mt-1"
+                    role="alert"
+                  >
+                    Your order has been Placed
+                    <button
+                      className="close"
+                      type="button"
+                      data-dismiss="alert"
+                    >
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
 
+              {showOrderDeleted ? (
+                <div className="col-12">
+                  <div
+                    className="alert alert-danger alert-dismissible mt-1"
+                    role="alert"
+                  >
+                    Your order has been deleted
+                    <button
+                      className="close"
+                      type="button"
+                      data-dismiss="alert"
+                    >
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
               {OrderService.getCartItems(orders).length == 0 ? (
                 <div className="text-danger">No Orders Present in the cart</div>
               ) : (
@@ -111,9 +200,11 @@ const Dashboard = () => {
                   quantity={order.quantity}
                   isPaymentCompleted={order.isPaymentCompleted}
                   userId={order.userId}
-                  orderId={order.orderId}
+                  orderId={order.id}
                   price={order.product.price}
                   productName={order.product.productName}
+                  onBuyClick={onBuyNowClick}
+                  onDeleteNow={onDeleteNowClick}
                 />
               ))}
             </div>
