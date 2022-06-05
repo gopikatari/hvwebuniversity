@@ -68,7 +68,6 @@
       "categoryId": 1
     }
   ],
-
   "users": [
     {
       "id": 1,
@@ -79,6 +78,16 @@
       "dateofbirth": "2000-12-15",
       "country": "USA",
       "receiveNewsLetters": true
+    },
+    {
+      "email": "katarigopi@gmail.com",
+      "password": "Gopi123$",
+      "fullName": "Gopi Katari",
+      "dateOfBirth": "1993-06-18",
+      "gender": "male",
+      "country": "3",
+      "receiveNewsLetters": true,
+      "id": 2
     }
   ],
   "orders": [

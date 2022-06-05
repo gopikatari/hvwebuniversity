@@ -152,7 +152,7 @@ function Register() {
     }
   };
 
-  const onRegisterClick = () => {
+  const onRegisterClick = async () => {
     let dirtyData = dirty;
     Object.keys(dirty).forEach(dirtyElement => {
       dirtyData[dirtyElement] = true;
@@ -161,7 +161,17 @@ function Register() {
     validate();
 
     if (isValid()) {
-      setMessage(<span className="text-success">Success</span>);
+      let response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        body: JSON.stringify(register),
+
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        setMessage(
+          <span className="text-success">{`User=> ${register.fullName} successfully registered`}</span>
+        );
+      }
     } else {
       setMessage(<span className="text-danger">Form Validation Failed</span>);
     }
