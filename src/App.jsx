@@ -20,7 +20,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <HashRouter>
         <Navbar />
-        <div className="container">
+        <div className="container-fluid">
           <Switch>
             <Route exact path="/" component={Login} />
             <Route path="/dashboard" component={Dashboard} />

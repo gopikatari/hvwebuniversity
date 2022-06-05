@@ -2,7 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../UserContext";
 
 const Login = props => {
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const [login, setLogin] = useState({
+    email: "scott@gmail.com",
+    password: "Scott123",
+  });
   useEffect(() => {
     document.title = "Login";
   }, []);

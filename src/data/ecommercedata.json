@@ -111,6 +111,13 @@
       "productId": 4,
       "quantity": 5,
       "isPaymentCompleted": false
+    },
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1,
+      "quantity": 2,
+      "isPaymentCompleted": false
     }
   ]
 }

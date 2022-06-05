@@ -15,3 +15,15 @@ input:focus,select:focus{
 .svgIconNav{
     width: 18px !important;
 }
+
+
+
+.nav-link.active{
+  border-bottom: 1px solid #f1f3f5 !important;
+}
+.header{
+    background-color:#f1f3f5 ;
+    position: sticky;
+    top:0;
+    z-index: 10000;
+}
