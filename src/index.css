@@ -4,7 +4,7 @@
 }
 
 
-input:focus{
+input:focus,select:focus{
     box-shadow: none !important; 
     border: 2px solid lightblue;
 }

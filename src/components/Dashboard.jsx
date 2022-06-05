@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function Dashboard() {
+const Dashboard = () => {
+  useEffect(() => {
+    document.title = "Dashboard";
+  }, []);
   return <div>Dashboard</div>;
-}
+};
 
 export default Dashboard;

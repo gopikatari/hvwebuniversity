@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Login = () => {
   const [login, setLogin] = useState({ email: "", password: "" });
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      console.log("LOGIN componet Unmounting.....");
+    };
+  });
 
   const handleChange = e => {
     setLogin({
