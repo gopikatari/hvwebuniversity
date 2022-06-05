@@ -8,7 +8,9 @@ input:focus,select:focus{
     box-shadow: none !important; 
     border: 2px solid lightblue;
 }
-
+button:focus{
+    box-shadow: none !important; 
+}
 .myNavColor{
     background-color: #1098ad !important;
 }
@@ -25,5 +27,5 @@ input:focus,select:focus{
     background-color:#f1f3f5 ;
     position: sticky;
     top:0;
-    z-index: 10000;
+    z-index: 10;
 }
