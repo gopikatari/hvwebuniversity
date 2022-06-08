@@ -43,6 +43,17 @@ function Navbar() {
               </NavLink>
             </li>
 
+            <li className="nav-item">
+              <NavLink
+                to="/store"
+                className="nav-link"
+                activeClassName="active"
+              >
+                <i className="fa fa-shopping-basket mr-1"></i>
+                Store
+              </NavLink>
+            </li>
+
             {!_userContext.user.isLoggedIn ? (
               <NavLink
                 to="/register"

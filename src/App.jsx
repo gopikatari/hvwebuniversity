@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import NoComponent from "./components/NoComponent";
 import Register from "./components/Register";
+import Store from "./components/Store";
 
 import UserContext from "./UserContext";
 
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/register" component={Register} />
+            <Route path="/store" component={Store} />
             <Route path="*" component={NoComponent} />
           </Switch>
         </div>

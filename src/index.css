@@ -24,8 +24,12 @@ button:focus{
   border-bottom: 1px solid #f1f3f5 !important;
 }
 .header{
-    background-color:#f1f3f5 ;
-    position: sticky;
+    background-color:#f1f3f5 !important ;
+    position: sticky !important;
     top:0;
     z-index: 10;
+}
+
+label[id^=chkCategory_],label[id^=chk_]{
+    cursor: pointer !important;
 }
