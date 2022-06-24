@@ -20,7 +20,7 @@ function Navbar() {
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark myNavColor">
         <a href="/#" className="navbar-brand">
-          ShoppingCart
+          ShoppingCart-123
         </a>
         <button
           className="navbar-toggler"
