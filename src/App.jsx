@@ -9,7 +9,6 @@ import Register from "./components/Register";
 import Store from "./components/Store";
 
 import UserContext from "./UserContext";
-
 function App() {
   const [user, setUser] = useState({
     isLoggedIn: false,
