@@ -57,7 +57,7 @@ function Store() {
         });
 
         if (orderResponse.ok) {
-          let order = await orderResponse.json();
+          //let order = await orderResponse.json();
 
           let prods = products.map(p => {
             if (p.id === _product.id) p.isOrdered = true;
