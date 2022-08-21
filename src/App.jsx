@@ -33,6 +33,4 @@ function App() {
     </UserContext.Provider>
   );
 }
-//other commit
 export default App;
-
